@@ -1,51 +1,33 @@
-function keyCall(event){
-    var x = event.which;  //unicode of the key
-        
-        if(x > 95 && x < 106){
-            document.getElementById("display").value += String.fromCharCode(x).substring(0, 0);  
-        }else if( x == 111 || x == 107 || x == 109 || x == 106){
-            document.getElementById("display").value += String.fromCharCode(x).substring(0, 0);
-            
-        }else if(x > 47 && x < 58){
-            document.getElementById("display").value += String.fromCharCode(x).substring(0, 0);
-        }
-        else if(x == 13){
-            cal();
-        }
-        else{
-            document.getElementById("display").value = 
-            document.getElementById("display").value.substring(0, document.getElementById("display").value.length-1);
-        }
-  }
-  
- function call(elem){
+//Function to get button values in display
+function call(elem){
     var val = elem.value;
-    document.getElementById("display").value += val;
- }
+    if(document.getElementById("display").innerHTML == 0){
+        document.getElementById("display").innerHTML = val;
+    }else{
+        document.getElementById("display").innerHTML += val;
+    }
+    
+}
  
+//Function to clean all the content of display
  function clean(){
-     document.getElementById("display").value = "";
+     document.getElementById("display").innerHTML = 0;
     
  }
 
+//Function to clear last digit in display
 function cancel(){
      var content = document.getElementById("display").textContent;
-     document.getElementById("display").value = content.substring(0, content.length - 1);
+     document.getElementById("display").innerHTML = content.substring(0, content.length-1);
      
 }
-    
+
+//Function to calculate input content
 function cal(){
-    var content = document.getElementById("display").value;
+    var content = document.getElementById("display").innerHTML;
     
     if(content){
-      document.getElementById("display").value = eval(content) ; 
+      document.getElementById("display").innerHTML = eval(content) ; 
     }
 
 }
-    
-function blink(){
-   var ele = document.getElementById('heading');
-   ele.style.visibility = (ele.style.visibility == 'hidden' ? "visible" : 'hidden'); // TERNARY OPERATOR IS USED
-}        
-
-setInterval(blink, 1000);
